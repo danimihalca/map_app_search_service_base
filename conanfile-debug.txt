@@ -1,0 +1,6 @@
+[requires]
+drogon/1.9.0
+gtest/1.14.0
+
+[generators]
+CMakeDeps
