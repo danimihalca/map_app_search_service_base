@@ -1,0 +1,22 @@
+name: Build image and artifacts
+
+on: push
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build artifacts
+        run: |
+          docker build --target=map-app-search-service-artifacts `./docker_build/source-build-args.sh docker_build/args/release.args` --output type=local,dest=$(pwd)/out/ .
+
+      - name: Publish artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-download
+          path: out/search-service-dependencies-rel.tar.gz
