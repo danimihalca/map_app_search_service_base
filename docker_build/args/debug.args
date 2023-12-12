@@ -1,0 +1,3 @@
+CONANFILE=conanfile-debug.txt
+ARTIFACTS_NAME=search-service-dependencies-dbg
+CONAN_BUILD_TYPE=Debug
