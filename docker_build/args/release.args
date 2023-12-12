@@ -1,0 +1,3 @@
+CONANFILE=conanfile-release.txt
+ARTIFACTS_NAME=search-service-dependencies-rel
+CONAN_BUILD_TYPE=Release
