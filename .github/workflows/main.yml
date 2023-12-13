@@ -23,7 +23,7 @@ jobs:
         with:
           push: true
           target: map-app-search-service-dep-build
-          tags: map-app-search-service-rel-env
+          tags: ghcr.io/${{ github.repository_owner }}/map-app-search-service-rel-env
           build-args: |
             CONANFILE=conanfile.txt
             ARTIFACTS_NAME=search-service-dependencies-rel
