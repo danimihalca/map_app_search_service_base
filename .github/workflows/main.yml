@@ -5,6 +5,7 @@ on: push
 jobs:
   build:
     name: Build Image
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
