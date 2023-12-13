@@ -11,6 +11,24 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          push: true
+          target: map-app-search-service-dep-build
+          tags: map-app-search-service-rel-env
+          build-args: |
+            CONANFILE=conanfile.txt
+            ARTIFACTS_NAME=search-service-dependencies-rel
+            CONAN_BUILD_TYPE=Release
+
       - name: Build artifacts
         run: |
           docker build --target=map-app-search-service-artifacts `./docker_build/source-build-args.sh docker_build/args/release.args` --output type=local,dest=$(pwd)/out/ .
@@ -18,5 +36,5 @@ jobs:
       - name: Publish artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: assets-for-download
+          name: search-service-dependencies-rel
           path: out/search-service-dependencies-rel.tar.gz
